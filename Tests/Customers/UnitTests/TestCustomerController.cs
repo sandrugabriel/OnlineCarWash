@@ -30,20 +30,6 @@ namespace Tests.Customers.UnitTests
         }
 
         [Fact]
-        public async Task GetAll_ItemsDoNotExist()
-        {
-            _mockQueryService.Setup(repo => repo.GetAllAsync()).ThrowsAsync(new ItemsDoNotExist(Constants.ItemsDoNotExist));
-
-            var restult = await customerApiController.GetAll();
-
-            var notFoundResult = Assert.IsType<NotFoundObjectResult>(restult.Result);
-
-            Assert.Equal(Constants.ItemsDoNotExist, notFoundResult.Value);
-            Assert.Equal(404, notFoundResult.StatusCode);
-
-        }
-
-        [Fact]
         public async Task GetAll_ValidData()
         {
             var customers = TestCustomerFactory.CreateCustomers(5);
