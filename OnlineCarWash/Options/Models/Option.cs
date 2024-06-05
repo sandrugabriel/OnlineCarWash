@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting.Server;
+using OnlineCarWash.ServicesOptions.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,6 +18,7 @@ namespace OnlineCarWash.Options.Models
         [Required]
         public int Price { get; set; }
 
+        public virtual List<ServiceOption> Services { get; set; }
 
     }
 }
