@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34928.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCarWash", "OnlineCarWash\OnlineCarWash.csproj", "{0CD83DE8-F23D-44E1-AA85-51EC2016F940}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{7AE29E60-DC3B-406B-9EAE-3E5509EB990A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0CD83DE8-F23D-44E1-AA85-51EC2016F940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CD83DE8-F23D-44E1-AA85-51EC2016F940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CD83DE8-F23D-44E1-AA85-51EC2016F940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CD83DE8-F23D-44E1-AA85-51EC2016F940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AE29E60-DC3B-406B-9EAE-3E5509EB990A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AE29E60-DC3B-406B-9EAE-3E5509EB990A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AE29E60-DC3B-406B-9EAE-3E5509EB990A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AE29E60-DC3B-406B-9EAE-3E5509EB990A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12C8AB6C-C400-40B6-9136-85C6F3A42EEA}
+	EndGlobalSection
+EndGlobal
