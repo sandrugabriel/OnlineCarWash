@@ -18,7 +18,7 @@ namespace OnlineCarWash.Customers.Services
         public async Task<List<CustomerResponse>> GetAllAsync()
         {
            var customers = await _repo.GetAllAsync();
-            if (customers.Count == 0) throw new ItemsDoNotExist(Constants.ItemsDoNotExist);
+            if (customers.Count == 0) return new List<CustomerResponse>();
 
             return customers;
         }

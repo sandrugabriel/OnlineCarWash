@@ -20,13 +20,4 @@
 	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Options\Controllers\" />
-    <Folder Include="Options\Dto\" />
-    <Folder Include="Options\Models\" />
-    <Folder Include="Options\Services\" />
-    <Folder Include="Options\Repository\" />
-    <Folder Include="Options\ProfileMappings\" />
-  </ItemGroup>
-
 </Project>

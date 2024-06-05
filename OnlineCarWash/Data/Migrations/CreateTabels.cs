@@ -16,8 +16,16 @@ namespace OnlineCarWash.Data.Migrations
             .WithColumn("Password").AsString().NotNullable()
             .WithColumn("PhoneNumber").AsString().NotNullable();
 
+
+            Create.Table("options")
+                    .WithColumn("Id").AsInt32().PrimaryKey().Identity()
+                    .WithColumn("Name").AsString().NotNullable()
+                    .WithColumn("Price").AsInt32().NotNullable();
+
+
         }
 
+        
 /*
             Create.Table("services")
             .WithColumn("Id").AsInt32().PrimaryKey().Identity()
@@ -26,10 +34,6 @@ namespace OnlineCarWash.Data.Migrations
             .WithColumn("Price").AsInt32().NotNullable()
             .WithColumn("Type").AsString().NotNullable();
 
-           Create.Table("options")
-           .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-           .WithColumn("Name").AsString().NotNullable()
-           .WithColumn("Price").AsInt32().NotNullable();
 
             Create.Table("appointments")
             .WithColumn("Id").AsInt32().PrimaryKey().NotNullable()

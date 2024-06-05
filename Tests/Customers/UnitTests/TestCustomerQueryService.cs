@@ -27,17 +27,6 @@ namespace Tests.Customers.UnitTests
         }
 
         [Fact]
-        public async Task GetAllCustomer_ItemsDoNotExist()
-        {
-            _mock.Setup(repo => repo.GetAllAsync()).ReturnsAsync( new List<CustomerResponse>());
-
-            var result = await Assert.ThrowsAsync<ItemsDoNotExist>(() => _queryServiceCustomer.GetAllAsync());
-
-            Assert.Equal(Constants.ItemsDoNotExist,result.Message);
-
-        }
-
-        [Fact]
         public async Task GetAllCustomer_ReturnCustomer()
         {
             var customers = TestCustomerFactory.CreateCustomers(5);
