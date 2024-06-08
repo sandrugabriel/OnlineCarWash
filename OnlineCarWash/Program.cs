@@ -1,5 +1,9 @@
 using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
+using OnlineCarWash.Appointments.Repository;
+using OnlineCarWash.Appointments.Repository.interfaces;
+using OnlineCarWash.Appointments.Services;
+using OnlineCarWash.Appointments.Services.interfaces;
 using OnlineCarWash.Customers.Repository;
 using OnlineCarWash.Customers.Repository.interfaces;
 using OnlineCarWash.Customers.Services;
@@ -34,6 +38,10 @@ builder.Services.AddScoped<IOptionQueryService, OptionQueryService>();
 builder.Services.AddScoped<IRepositoryService, RepositoryService>();
 builder.Services.AddScoped<IServiceQueryService, ServiceQueryService>();
 builder.Services.AddScoped<IServiceCommandService, ServiceCommandService>();
+
+builder.Services.AddScoped<IRepositoryAppointment, RepositoryAppointment>();
+builder.Services.AddScoped<IAppointmentQueryService, AppointmentQueryService>();
+
 
 builder.Services.AddDbContext<AppDbContext>(op => op.UseMySql(builder.Configuration.GetConnectionString("Default")!,
     new MySqlServerVersion(new Version(8, 0, 21))), ServiceLifetime.Scoped);

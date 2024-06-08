@@ -83,7 +83,7 @@ namespace Tests.Options.UnitTests
             _mock.Setup(repo => repo.GetByNameOption("test1")).ReturnsAsync((Option)null);
 
             var restul = await Assert.ThrowsAsync<ItemDoesNotExist>(() => _query.GetByNameOption("test1"));
-
+            
             Assert.NotNull(restul);
             Assert.Equal(Constants.ItemDoesNotExist, restul.Message);
 

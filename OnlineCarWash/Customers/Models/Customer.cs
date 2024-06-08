@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OnlineCarWash.Appointments.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineCarWash.Customers.Models
@@ -21,6 +22,8 @@ namespace OnlineCarWash.Customers.Models
 
         [Required]
         public string Password { get; set; }
+
+        public virtual List<Appointment> Appointments { get; set; }
 
     }
 }

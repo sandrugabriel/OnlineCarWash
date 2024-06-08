@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OnlineCarWash.Appointments.Models;
 using OnlineCarWash.Customers.Models;
 using OnlineCarWash.Options.Models;
 using OnlineCarWash.Services.Models;
@@ -17,6 +18,8 @@ namespace OnlineCarWash.Data
         public virtual DbSet<Option> Options { get; set; }
         public virtual DbSet<ServiceOption> ServiceOptions { get; set; }
         public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<Appointment> Appointments { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +34,20 @@ namespace OnlineCarWash.Data
             .WithMany(a => a.Options)
             .HasForeignKey(a => a.ServiceId)
             .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<Appointment>()
+            .HasOne(a => a.Service)
+            .WithMany(a => a.Appointments)
+            .HasForeignKey(a => a.ServiceId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Appointment>()
+            .HasOne(a => a.Customer)
+            .WithMany(a => a.Appointments)
+            .HasForeignKey(a => a.CustomerId)
+            .OnDelete(DeleteBehavior.Cascade);
+
 
         }
 

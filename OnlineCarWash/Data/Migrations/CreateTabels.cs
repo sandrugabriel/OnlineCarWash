@@ -33,17 +33,14 @@ namespace OnlineCarWash.Data.Migrations
                   .WithColumn("OptionId").AsInt32().NotNullable()
                   .WithColumn("ServiceId").AsInt32().NotNullable();
 
-        }
-
-        
-/*
-           
             Create.Table("appointments")
-            .WithColumn("Id").AsInt32().PrimaryKey().NotNullable()
-            .WithColumn("CustomerId").AsInt32().NotNullable()
-            .WithColumn("ServiceId").AsInt32().NotNullable()
-            .WithColumn("OptionId").AsInt32().NotNullable()
-            .WithColumn("TotalAmount").AsInt32().NotNullable();*/
+                        .WithColumn("Id").AsInt32().PrimaryKey().Identity()
+                        .WithColumn("CustomerId").AsInt32().NotNullable()
+                        .WithColumn("ServiceId").AsInt32().NotNullable()
+                        .WithColumn("OptionId").AsInt32().NotNullable()
+                        .WithColumn("ReservationDate").AsDateTime().NotNullable()
+                        .WithColumn("TotalAmount").AsInt32().NotNullable();
+        }
 
         public override void Down()
         {
