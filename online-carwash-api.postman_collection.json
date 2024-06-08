@@ -1,0 +1,776 @@
+{
+	"info": {
+		"_postman_id": "1e81fea2-7235-4af8-b45e-57a15dd16ad6",
+		"name": "online-carwash-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33668461"
+	},
+	"item": [
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "Query",
+					"item": [
+						{
+							"name": "AllCustomers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerCustomer/All",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerCustomer",
+										"All"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FindCustomerById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerCustomer/FindById?id=1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerCustomer",
+										"FindById"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FindCustomerByName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerCustomer/FindByName?name=gabi",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerCustomer",
+										"FindByName"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "gabi"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Command",
+					"item": [
+						{
+							"name": "Customer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"test12\",\r\n  \"email\": \"test12@gmail.com\",\r\n  \"phoneNumber\": \"07777077\",\r\n  \"password\": \"12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerCustomer/CreateCustomer",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerCustomer",
+										"CreateCustomer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Customer",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerCustomer/UpdateCustomer?id=4",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerCustomer",
+										"UpdateCustomer"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Customer",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerCustomer/DeleteCustomer?id=7",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerCustomer",
+										"DeleteCustomer"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddAppointment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerCustomer/AddAppointment?id=1&nameService=standard&nameOption=cleaning%20inside&day=11&hour=13",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerCustomer",
+										"AddAppointment"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										},
+										{
+											"key": "nameService",
+											"value": "standard"
+										},
+										{
+											"key": "nameOption",
+											"value": "cleaning%20inside"
+										},
+										{
+											"key": "day",
+											"value": "11"
+										},
+										{
+											"key": "hour",
+											"value": "13"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteAppointment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerCustomer/DeleteAppointment?id=1&nameService=standard&nameOption=cleaning%20inside",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerCustomer",
+										"DeleteAppointment"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										},
+										{
+											"key": "nameService",
+											"value": "standard"
+										},
+										{
+											"key": "nameOption",
+											"value": "cleaning%20inside"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Options",
+			"item": [
+				{
+					"name": "Query",
+					"item": [
+						{
+							"name": "AllOption",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerOption/All",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerOption",
+										"All"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FindById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerOption/FindById?id=1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerOption",
+										"FindById"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FindByName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerOption/FindByName?name=a",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerOption",
+										"FindByName"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "a"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Command",
+					"item": [
+						{
+							"name": "Option",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"test\",\r\n  \"price\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerOption/CreateOption",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerOption",
+										"CreateOption"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Option",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"price\": 10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerOption/UpdateOption?id=1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerOption",
+										"UpdateOption"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Option",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerOption/DeleteOption?id=2",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerOption",
+										"DeleteOption"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "Query",
+					"item": [
+						{
+							"name": "AllService",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerService/All",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerService",
+										"All"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FindById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerService/FindById?id=1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerService",
+										"FindById"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "FindByName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerService/FindByName?name=t",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerService",
+										"FindByName"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "t"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Command",
+					"item": [
+						{
+							"name": "Service",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"test5\",\r\n  \"descriptions\": \"sef\",\r\n  \"price\": 100,\r\n  \"type\": \"sad\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerService/CreateService",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerService",
+										"CreateService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Service",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"price\": 10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerService/UpdateService?id=1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerService",
+										"UpdateService"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Service",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerService/DeleteService?id=6",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerService",
+										"DeleteService"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AddOption",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerService/AddOption?id=4&name=cleaning%20inside",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerService",
+										"AddOption"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "4"
+										},
+										{
+											"key": "name",
+											"value": "cleaning%20inside"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteOption",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:7292/api/v1/ControllerService/DeleteOption?id=3&name=cleaning%20inside",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "7292",
+									"path": [
+										"api",
+										"v1",
+										"ControllerService",
+										"DeleteOption"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "3"
+										},
+										{
+											"key": "name",
+											"value": "cleaning%20inside"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Appointments",
+			"item": [
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7292/api/v1/ControllerAppointment/All",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7292",
+							"path": [
+								"api",
+								"v1",
+								"ControllerAppointment",
+								"All"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7292/api/v1/ControllerAppointment/FindById?id=2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7292",
+							"path": [
+								"api",
+								"v1",
+								"ControllerAppointment",
+								"FindById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

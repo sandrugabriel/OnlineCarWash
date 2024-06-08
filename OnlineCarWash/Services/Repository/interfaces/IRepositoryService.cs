@@ -1,5 +1,6 @@
 ﻿using OnlineCarWash.Options.Models;
 using OnlineCarWash.Services.Dto;
+using OnlineCarWash.Services.Models;
 
 namespace OnlineCarWash.Services.Repository.interfaces
 {
@@ -10,6 +11,10 @@ namespace OnlineCarWash.Services.Repository.interfaces
         Task<ServiceResponse> GetByIdAsync(int id);
 
         Task<ServiceResponse> GetByNameAsync(string name);
+
+        Task<Service> GetById(int id);
+
+        Task<Service> GetByName(string name);
 
         Task<ServiceResponse> CreateService(CreateServiceRequest createRequest);
 

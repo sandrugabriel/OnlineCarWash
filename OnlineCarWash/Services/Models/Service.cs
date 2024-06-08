@@ -1,4 +1,5 @@
-﻿using OnlineCarWash.ServicesOptions.Models;
+﻿using OnlineCarWash.Appointments.Models;
+using OnlineCarWash.ServicesOptions.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,6 +26,7 @@ namespace OnlineCarWash.Services.Models
 
 
         public virtual List<ServiceOption> Options { get; set; }
+        public virtual List<Appointment> Appointments { get; set; }
 
     }
 }

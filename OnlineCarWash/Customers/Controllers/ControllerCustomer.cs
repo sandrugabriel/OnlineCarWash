@@ -100,5 +100,35 @@ namespace OnlineCarWash.Customers.Controllers
                 return NotFound(ex.Message);
             }
         }
+
+        public override async Task<ActionResult<CustomerResponse>> AddAppointment([FromQuery] int id, [FromQuery] string nameService, [FromQuery] string nameOption, [FromQuery] int day, [FromQuery] int hour)
+        {
+            try
+            {
+                var customer = await _command.AddAppointment(id,nameService,nameOption,day,hour);
+                return Ok(customer);
+            }
+            catch (ItemDoesNotExist ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (UnavailableTime ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        public override async Task<ActionResult<CustomerResponse>> DeleteAppointment([FromQuery] int id, [FromQuery] string nameService, [FromQuery] string nameOption)
+        {
+            try
+            {
+                var customer = await _command.DeleteAppointment(id, nameService, nameOption);
+                return Ok(customer);
+            }
+            catch (ItemDoesNotExist ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
     }
 }

@@ -74,6 +74,9 @@ namespace OnlineCarWash.Services.ServiceCommandQuery
             var service = await _repo.GetByIdAsync(id);
             if (service == null) throw new ItemDoesNotExist(Constants.ItemDoesNotExist);
 
+            if (updateRequest.Price <= 0) throw new InvalidPrice(Constants.InvalidPrice);
+
+
             service = await _repo.UpdateService(id, updateRequest);
 
             return service;

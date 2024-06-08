@@ -11,18 +11,28 @@ using System.Threading.Tasks;
 using Tests.Customers.Helpers;
 using OnlineCarWash.Customers.Dto;
 using OnlineCarWash.System.Constatns;
+using OnlineCarWash.Appointments.Repository.interfaces;
+using OnlineCarWash.Options.Repository.interfaces;
+using OnlineCarWash.Services.Repository.interfaces;
 
 namespace Tests.Customers.UnitTests
 {
     public class TestCustomerCommandService
     {
         private readonly Mock<IRepositoryCustomer> _mock;
+        private readonly Mock<IRepositoryAppointment> _mockApp;
+        private readonly Mock<IRepositoryOption> _mockOption;
+        private readonly Mock<IRepositoryService> _mockService;
+
         private readonly ICommandServiceCustomer _commandService;
 
         public TestCustomerCommandService()
         {
             _mock = new Mock<IRepositoryCustomer>();
-            _commandService = new CommandServiceCustomer(_mock.Object);
+            _mockApp = new Mock<IRepositoryAppointment>();
+            _mockOption = new Mock<IRepositoryOption>();
+            _mockService = new Mock<IRepositoryService>();
+            _commandService = new CommandServiceCustomer(_mock.Object,_mockService.Object,_mockApp.Object,_mockOption.Object);
 
         }
 

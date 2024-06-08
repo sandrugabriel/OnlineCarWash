@@ -102,6 +102,24 @@ namespace OnlineCarWash.Services.Repository
             return _mapper.Map<ServiceResponse>(service);
         }
 
+        public async Task<Service> GetById(int id)
+        {
+
+            var service = await _context.Services.Include(s => s.Options).
+                ThenInclude(s => s.Option).FirstOrDefaultAsync(s => s.Id == id);
+
+            return service;
+        }
+
+        public async Task<Service> GetByName(string name)
+        {
+            var service = await _context.Services.Include(s => s.Options).
+                ThenInclude(s => s.Option).FirstOrDefaultAsync(s => s.Name == name);
+
+            return service;
+        }
+
+
         public async Task<ServiceResponse> UpdateService(int id, UpdateServiceRequest updateRequest)
         {
             var service = await _context.Services.Include(s => s.Options).

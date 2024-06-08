@@ -11,5 +11,9 @@ namespace OnlineCarWash.Customers.Services.interfaces
 
         Task<CustomerResponse> DeleteCustomer(int id);
 
+        Task<CustomerResponse> AddAppointment(int id,string nameService,string option,int day, int hour);
+
+        Task<CustomerResponse> DeleteAppointment(int id,string nameService, string option);
+
     }
 }

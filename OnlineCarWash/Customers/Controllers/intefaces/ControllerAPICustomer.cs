@@ -39,5 +39,17 @@ namespace OnlineCarWash.Customers.Controllers.intefaces
         [ProducesResponseType(statusCode: 404, type: typeof(string))]
         public abstract Task<ActionResult<CustomerResponse>> DeleteCustomer([FromQuery] int id);
 
+        [HttpPut("AddAppointment")]
+        [ProducesResponseType(statusCode: 200, type: typeof(CustomerResponse))]
+        [ProducesResponseType(statusCode: 400, type: typeof(string))]
+        [ProducesResponseType(statusCode: 404, type: typeof(string))]
+        public abstract Task<ActionResult<CustomerResponse>> AddAppointment([FromQuery] int id, [FromQuery] string nameService, [FromQuery] string nameOption, [FromQuery] int day, [FromQuery] int hour);
+       
+        [HttpPut("DeleteAppointment")]
+        [ProducesResponseType(statusCode: 200, type: typeof(CustomerResponse))]
+        [ProducesResponseType(statusCode: 400, type: typeof(string))]
+        [ProducesResponseType(statusCode: 404, type: typeof(string))]
+        public abstract Task<ActionResult<CustomerResponse>> DeleteAppointment([FromQuery] int id, [FromQuery] string nameService, [FromQuery] string nameOption);
+
     }
 }

@@ -7,6 +7,7 @@
         public const string InvalidName = "The name is invalid";
         public const string InvalidPrice = "The price is invalid";
         public const string AlreadyOption = "The option already exist";
+        public const string UnavailableTime = "This time is not available";
 
 
 

@@ -64,7 +64,7 @@ namespace OnlineCarWash.Services.Controller
                 var service = await _command.CreateService(createRequestService);
                 return Ok(service);
             }
-            catch (InvalidName ex)
+            catch (InvalidPrice ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -81,7 +81,7 @@ namespace OnlineCarWash.Services.Controller
             {
                 return NotFound(ex.Message);
             }
-            catch (InvalidName ex)
+            catch (InvalidPrice ex)
             {
                 return BadRequest(ex.Message);
             }
