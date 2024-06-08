@@ -1,4 +1,5 @@
 ﻿using OnlineCarWash.Options.Models;
+using OnlineCarWash.Services.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
@@ -17,8 +18,11 @@ namespace OnlineCarWash.ServicesOptions.Models
         [JsonIgnore]
         public virtual Option Option { get; set; }
 
-        [Required]
+        [ForeignKey("ServiceId")]
         public int ServiceId { get; set; }
+
+        [JsonIgnore]
+        public virtual Service Service { get; set; }
 
     }
 }

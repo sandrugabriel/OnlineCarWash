@@ -9,6 +9,10 @@ using OnlineCarWash.Options.Repository;
 using OnlineCarWash.Options.Repository.interfaces;
 using OnlineCarWash.Options.Services;
 using OnlineCarWash.Options.Services.interfaces;
+using OnlineCarWash.Services.Repository;
+using OnlineCarWash.Services.Repository.interfaces;
+using OnlineCarWash.Services.ServiceCommandQuery;
+using OnlineCarWash.Services.ServiceCommandQuery.interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +30,10 @@ builder.Services.AddScoped<IQueryServiceCustomer, QueryServiceCustomer>();
 builder.Services.AddScoped<IRepositoryOption, RepositoryOption>();
 builder.Services.AddScoped<IOptionCommandService, OptionCommandService>();
 builder.Services.AddScoped<IOptionQueryService, OptionQueryService>();
+
+builder.Services.AddScoped<IRepositoryService, RepositoryService>();
+builder.Services.AddScoped<IServiceQueryService, ServiceQueryService>();
+builder.Services.AddScoped<IServiceCommandService, ServiceCommandService>();
 
 builder.Services.AddDbContext<AppDbContext>(op => op.UseMySql(builder.Configuration.GetConnectionString("Default")!,
     new MySqlServerVersion(new Version(8, 0, 21))), ServiceLifetime.Scoped);
