@@ -43,7 +43,7 @@ namespace OnlineCarWash.Services.Controller.interfaces
         [HttpPut("AddOption")]
         [ProducesResponseType(statusCode: 201, type: typeof(ServiceResponse))]
         [ProducesResponseType(statusCode: 400, type: typeof(string))]
-        public abstract Task<ActionResult<ServiceResponse>> AddOption([FromQuery]int id, [FromQuery]string name);
+        public abstract Task<ActionResult<ServiceResponse>> AddOption([FromQuery]int id, [FromBody]string name);
 
         [HttpPut("DeleteOption")]
         [ProducesResponseType(statusCode: 201, type: typeof(ServiceResponse))]

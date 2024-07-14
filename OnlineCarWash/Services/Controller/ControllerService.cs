@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineCarWash.Services.Dto;
 using OnlineCarWash.Services.Controller.interfaces;
 using OnlineCarWash.System.Exceptions;
@@ -18,6 +19,7 @@ namespace OnlineCarWash.Services.Controller
             _command = command;
         }
 
+        [Authorize]
         public override async Task<ActionResult<List<ServiceResponse>>> GetAll()
         {
             try
@@ -31,6 +33,7 @@ namespace OnlineCarWash.Services.Controller
             }
         }
 
+        [Authorize]
         public override async Task<ActionResult<ServiceResponse>> GetById([FromQuery] int id)
         {
             try
@@ -44,6 +47,7 @@ namespace OnlineCarWash.Services.Controller
             }
         }
 
+        [Authorize]
         public override async Task<ActionResult<ServiceResponse>> GetByName([FromQuery] string name)
         {
             try
@@ -57,6 +61,7 @@ namespace OnlineCarWash.Services.Controller
             }
         }
 
+        [Authorize]
         public override async Task<ActionResult<ServiceResponse>> CreateService([FromBody] CreateServiceRequest createRequestService)
         {
             try
@@ -70,6 +75,7 @@ namespace OnlineCarWash.Services.Controller
             }
         }
 
+        [Authorize]
         public override async Task<ActionResult<ServiceResponse>> UpdateService([FromQuery] int id, [FromBody] UpdateServiceRequest updateRequest)
         {
             try
@@ -84,10 +90,14 @@ namespace OnlineCarWash.Services.Controller
             catch (InvalidPrice ex)
             {
                 return BadRequest(ex.Message);
+            } catch (InvalidName ex)
+            {
+                return BadRequest(ex.Message);
             }
 
         }
 
+        [Authorize]
         public override async Task<ActionResult<ServiceResponse>> DeleteService([FromQuery] int id)
         {
             try
@@ -101,7 +111,8 @@ namespace OnlineCarWash.Services.Controller
             }
         }
 
-        public override async Task<ActionResult<ServiceResponse>> AddOption([FromQuery] int id, [FromQuery] string name)
+        [Authorize]
+        public override async Task<ActionResult<ServiceResponse>> AddOption([FromQuery] int id, [FromBody] string name)
         {
             try
             {
@@ -118,6 +129,7 @@ namespace OnlineCarWash.Services.Controller
             }
         }
 
+        [Authorize]
         public override async Task<ActionResult<ServiceResponse>> DeleteOption([FromQuery] int id, [FromQuery] string name)
         {
             try

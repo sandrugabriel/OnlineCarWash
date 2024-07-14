@@ -4,6 +4,9 @@ namespace OnlineCarWash.Customers.Dto
 {
     public class CreateCustomerRequest
     {
+        
+        public string Username { get; set; }
+        
         public string Name { get; set; }
 
         public string Email { get; set; }

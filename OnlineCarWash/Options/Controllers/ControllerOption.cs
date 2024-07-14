@@ -7,6 +7,7 @@ using OnlineCarWash.Options.Models;
 using OnlineCarWash.Options.Services.interfaces;
 using OnlineCarWash.System.Exceptions;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineCarWash.Options.Controllers
 {
@@ -21,6 +22,7 @@ namespace OnlineCarWash.Options.Controllers
             _query = query;
         }
 
+        [Authorize]
         public override async Task<ActionResult<List<Option>>> GetAll()
         {
             try
@@ -34,7 +36,8 @@ namespace OnlineCarWash.Options.Controllers
             }
 
         }
-
+        
+        [Authorize]
         public override async Task<ActionResult<Option>> GetById([FromQuery] int id)
         {
             try
@@ -48,6 +51,7 @@ namespace OnlineCarWash.Options.Controllers
             }
         }
 
+        [Authorize]
         public override async Task<ActionResult<Option>> GetByName([FromQuery] string name)
         {
             try
@@ -61,6 +65,7 @@ namespace OnlineCarWash.Options.Controllers
             }
         }
 
+        [Authorize]
         public override async Task<ActionResult<Option>> Create([FromBody] CreateOptionRequest createOptionRequest)
         {
             try
@@ -82,6 +87,7 @@ namespace OnlineCarWash.Options.Controllers
             }
         }
 
+        [Authorize]
         public override async Task<ActionResult<Option>> Update([FromQuery] int id, [FromBody] UpdateOptionRequest updateOptionRequest)
         {
             try
@@ -104,6 +110,7 @@ namespace OnlineCarWash.Options.Controllers
 
         }
 
+        [Authorize]
         public override async Task<ActionResult<Option>> Delete([FromQuery] int id)
         {
             try

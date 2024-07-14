@@ -103,6 +103,7 @@ namespace Tests.Services.UnitTests
         {
             var updateRequest = new UpdateServiceRequest
             {
+                Name = "asd",
                 Price = 10,
                 Descriptions = "adsda"
             };

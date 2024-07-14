@@ -43,7 +43,9 @@ namespace OnlineCarWash.Options.Services
         {
             var option = await _repo.GetByIdOption(id);
             if (option == null) throw new ItemDoesNotExist(Constants.ItemDoesNotExist);
-
+            
+            if (updateOptionRequest.Name.Length <= 1) throw new InvalidName(Constants.InvalidName);
+            
             option = await _repo.UpdateOption(id, updateOptionRequest);
 
             return option;
