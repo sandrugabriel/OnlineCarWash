@@ -23,6 +23,22 @@ namespace OnlineCarWash.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Customer>(entity =>
+            {
+                entity.ToTable("Customers");
+                entity.Property(s=>s.Email).IsRequired().HasMaxLength(256);
+                entity.Property(s => s.NormalizedEmail).HasMaxLength(256);
+                entity.Property(s => s.UserName).IsRequired().HasMaxLength(256);
+                entity.Property(s => s.NormalizedUserName).HasMaxLength(256);
+                entity.Property(s => s.Name).IsRequired().HasMaxLength(100);
+                entity.Property(s => s.PhoneNumber).IsRequired().HasMaxLength(256);
+
+                entity.HasDiscriminator<string>("Discriminator").HasValue("Customer");
+
+            });
+
             modelBuilder.Entity<ServiceOption>()
             .HasOne(a => a.Option)
             .WithMany(a => a.Services)

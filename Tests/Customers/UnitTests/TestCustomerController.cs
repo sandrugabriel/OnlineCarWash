@@ -9,9 +9,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Tests.Customers.Helpers;
 using OnlineCarWash.System.Constatns;
 using OnlineCarWash.Customers.Dto;
+using OnlineCarWash.Customers.Models;
 
 namespace Tests.Customers.UnitTests
 {
@@ -20,13 +24,20 @@ namespace Tests.Customers.UnitTests
         private readonly Mock<ICommandServiceCustomer> _mockCommandService;
         private readonly Mock<IQueryServiceCustomer> _mockQueryService;
         private readonly ControllerAPICustomer customerApiController;
-
+        private readonly Mock<UserManager<Customer>> _mockUserManeger;
+        private readonly Mock<SignInManager<Customer>> _mockSignInManager;
+        private readonly Mock<IConfiguration> _mockConfiguration;
+        private Mock<IMapper> _mockMapper;
         public TestCustomerController()
         {
             _mockCommandService = new Mock<ICommandServiceCustomer>();
             _mockQueryService = new Mock<IQueryServiceCustomer>();
-
-            customerApiController = new ControllerCustomer(_mockQueryService.Object, _mockCommandService.Object);
+            _mockUserManeger = new Mock<UserManager<Customer>>();
+            _mockConfiguration = new Mock<IConfiguration>();
+            _mockSignInManager = new Mock<SignInManager<Customer>>();
+            _mockMapper = new Mock<IMapper>();
+            customerApiController = new ControllerCustomer(_mockMapper.Object,_mockUserManeger.Object,_mockSignInManager.Object,_mockConfiguration.Object,_mockQueryService.Object, _mockCommandService.Object);
+            
         }
 
         [Fact]
@@ -115,17 +126,18 @@ namespace Tests.Customers.UnitTests
 
             var createRequest = new CreateCustomerRequest
             {
-
+                Username = "test",
                 Name = "",
                 PhoneNumber = "07777777",
-                Email = "test@gmail.com"
+                Email = "test@gmail.com",
+                Password = "asdaASD12!"
             };
 
 
             _mockCommandService.Setup(repo => repo.CreateCustomer(It.IsAny<CreateCustomerRequest>())).
                 ThrowsAsync(new InvalidName(Constants.InvalidName));
 
-            var result = await customerApiController.CreateCustomer(createRequest);
+            var result = await customerApiController.RegisterCustomer(createRequest);
 
             var badRequest = Assert.IsType<BadRequestObjectResult>(result.Result);
 
@@ -139,24 +151,37 @@ namespace Tests.Customers.UnitTests
         {
             var createRequest = new CreateCustomerRequest
             {
-                Name = "Test",
+                Username = "test3aw4",
+                Name = "Teswqt",
                 PhoneNumber = "07777777",
-                Email = "test@gmail.com"
+                Email = "test@gmail.com",
+                Password = "ASsda123!@"
             };
 
-            var customer = TestCustomerFactory.CreateCustomer(1);
+            var customer = new Customer();
             customer.Name = createRequest.Name;
             customer.Email = createRequest.Email;
+            customer.PhoneNumber = createRequest.PhoneNumber;
+            customer.UserName = createRequest.Username;
+            /*
+           _mockCommandService.Setup(repo => repo.CreateCustomer(It.IsAny<CreateCustomerRequest>())).ReturnsAsync(customer);
+           */
+            
+            _mockUserManeger.Setup(repo => repo.CreateAsync(It.IsAny<Customer>(),createRequest.Password)).ReturnsAsync(IdentityResult.Success);
+            _mockMapper.Setup(m=>m.Map<CustomerResponse>(It.IsAny<Customer>())).Returns(new CustomerResponse{Name = createRequest.Name});
+            _mockConfiguration.SetupGet(conf => conf["Jwt:Key"]).Returns("dummy_jwt_key");
+            _mockConfiguration.SetupGet(conf => conf["Jwt:Issuer"]).Returns("dummy_jwt_issuer");
+            _mockConfiguration.SetupGet(conf => conf["Jwt:Audience"]).Returns("dummy_jwt_audience");
 
-            _mockCommandService.Setup(repo => repo.CreateCustomer(It.IsAny<CreateCustomerRequest>())).ReturnsAsync(customer);
 
-            var result = await customerApiController.CreateCustomer(createRequest);
+            var result = await customerApiController.RegisterCustomer(createRequest);
 
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
 
+            var customerRes = Assert.IsType<CustomerResponse>(okResult.Value);
+            
             Assert.Equal(okResult.StatusCode, 200);
-            Assert.Equal(okResult.Value, customer);
-
+            Assert.Equal(customerRes.Name,customer.Name);
         }
 
         [Fact]
@@ -233,7 +258,7 @@ namespace Tests.Customers.UnitTests
 
         }
 
-
+        
 
     }
 }

@@ -76,6 +76,7 @@ namespace OnlineCarWash.Services.ServiceCommandQuery
 
             if (updateRequest.Price <= 0) throw new InvalidPrice(Constants.InvalidPrice);
 
+            if (updateRequest.Name.Length <= 1) throw new InvalidName(Constants.InvalidName);
 
             service = await _repo.UpdateService(id, updateRequest);
 

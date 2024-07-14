@@ -1,10 +1,11 @@
-﻿using OnlineCarWash.Appointments.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using OnlineCarWash.Appointments.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineCarWash.Customers.Models
 {
-    public class Customer
+    public class Customer : IdentityUser<int>
     {
 
         [Key]
@@ -13,15 +14,6 @@ namespace OnlineCarWash.Customers.Models
 
         [Required]
         public string Name { get; set; }
-
-        [Required]
-        public string Email { get; set; }
-
-        [Required]
-        public string PhoneNumber { get; set; }
-
-        [Required]
-        public string Password { get; set; }
 
         public virtual List<Appointment> Appointments { get; set; }
 

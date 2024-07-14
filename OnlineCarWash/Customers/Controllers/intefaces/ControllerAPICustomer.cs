@@ -26,7 +26,13 @@ namespace OnlineCarWash.Customers.Controllers.intefaces
         [HttpPost("CreateCustomer")]
         [ProducesResponseType(statusCode: 201, type: typeof(CustomerResponse))]
         [ProducesResponseType(statusCode: 400, type: typeof(string))]
-        public abstract Task<ActionResult<CustomerResponse>> CreateCustomer([FromBody] CreateCustomerRequest createRequestCustomer);
+        public abstract Task<ActionResult<CustomerResponse>> RegisterCustomer([FromBody] CreateCustomerRequest createRequestCustomer);
+
+        [HttpPost("LoginCustomer")]
+        [ProducesResponseType(statusCode: 201, type: typeof(CustomerResponse))]
+        [ProducesResponseType(statusCode: 400, type: typeof(string))]
+        public abstract Task<ActionResult<CustomerResponse>> LoginCustomer([FromBody] LoginRequest request);
+
 
         [HttpPut("UpdateCustomer")]
         [ProducesResponseType(statusCode: 200, type: typeof(CustomerResponse))]
@@ -43,7 +49,7 @@ namespace OnlineCarWash.Customers.Controllers.intefaces
         [ProducesResponseType(statusCode: 200, type: typeof(CustomerResponse))]
         [ProducesResponseType(statusCode: 400, type: typeof(string))]
         [ProducesResponseType(statusCode: 404, type: typeof(string))]
-        public abstract Task<ActionResult<CustomerResponse>> AddAppointment([FromQuery] int id, [FromQuery] string nameService, [FromQuery] string nameOption, [FromQuery] int day, [FromQuery] int hour);
+        public abstract Task<ActionResult<CustomerResponse>> AddAppointment([FromQuery] int id, AddAppointmentRequest request);
        
         [HttpPut("DeleteAppointment")]
         [ProducesResponseType(statusCode: 200, type: typeof(CustomerResponse))]
