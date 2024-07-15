@@ -10,8 +10,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Tests.Customers.Helpers;
 using OnlineCarWash.System.Constatns;
 using OnlineCarWash.Customers.Dto;
@@ -24,19 +29,47 @@ namespace Tests.Customers.UnitTests
         private readonly Mock<ICommandServiceCustomer> _mockCommandService;
         private readonly Mock<IQueryServiceCustomer> _mockQueryService;
         private readonly ControllerAPICustomer customerApiController;
-        private readonly Mock<UserManager<Customer>> _mockUserManeger;
-        private readonly Mock<SignInManager<Customer>> _mockSignInManager;
+        private readonly UserManager<Customer> _userManeger;
+        private readonly SignInManager<Customer> _signInManager;
         private readonly Mock<IConfiguration> _mockConfiguration;
         private Mock<IMapper> _mockMapper;
+        private readonly Mock<UserManager<Customer>> _mockUserManager;
         public TestCustomerController()
         {
             _mockCommandService = new Mock<ICommandServiceCustomer>();
             _mockQueryService = new Mock<IQueryServiceCustomer>();
-            _mockUserManeger = new Mock<UserManager<Customer>>();
             _mockConfiguration = new Mock<IConfiguration>();
-            _mockSignInManager = new Mock<SignInManager<Customer>>();
             _mockMapper = new Mock<IMapper>();
-            customerApiController = new ControllerCustomer(_mockMapper.Object,_mockUserManeger.Object,_mockSignInManager.Object,_mockConfiguration.Object,_mockQueryService.Object, _mockCommandService.Object);
+            _mockUserManager = new Mock<UserManager<Customer>>();
+
+            var store = new Mock<IUserStore<Customer>>();
+            var option = new Mock<IOptions<IdentityOptions>>();
+            var passwordHash = new Mock<IPasswordHasher<Customer>>();
+            var userValidators = new List<IUserValidator<Customer>> { new Mock<IUserValidator<Customer>>().Object };
+            var passwordValidator = new List<IPasswordValidator<Customer>> { new Mock<IPasswordValidator<Customer>>().Object };
+
+            var keyNormalizer = new Mock<ILookupNormalizer>();
+            var errors = new Mock<IdentityErrorDescriber>();
+            var services = new Mock<IServiceProvider>();
+            var logger = new Mock<ILogger<UserManager<Customer>>>();
+
+            _userManeger = new UserManager<Customer>(store.Object, option.Object, passwordHash.Object, userValidators,
+                passwordValidator,
+                keyNormalizer.Object, errors.Object, services.Object, logger.Object);
+
+            var contextAccessor = new Mock<IHttpContextAccessor>();
+            var userClaimsPrincipalFactory = new Mock<IUserClaimsPrincipalFactory<Customer>>();
+            var signInManagerLogger = new Mock<ILogger<SignInManager<Customer>>>();
+            var authenticationSchemeProvider = new Mock<IAuthenticationSchemeProvider>();
+            var userConfirmation = new Mock<IUserConfirmation<Customer>>();
+            
+            
+            _signInManager = new SignInManager<Customer>(_userManeger, contextAccessor.Object,
+                userClaimsPrincipalFactory.Object, option.Object,
+                signInManagerLogger.Object, authenticationSchemeProvider.Object,userConfirmation.Object);
+            
+            
+            customerApiController = new ControllerCustomer(_mockMapper.Object,_userManeger,_signInManager,_mockConfiguration.Object,_mockQueryService.Object, _mockCommandService.Object);
             
         }
 
@@ -167,12 +200,12 @@ namespace Tests.Customers.UnitTests
            _mockCommandService.Setup(repo => repo.CreateCustomer(It.IsAny<CreateCustomerRequest>())).ReturnsAsync(customer);
            */
             
-            _mockUserManeger.Setup(repo => repo.CreateAsync(It.IsAny<Customer>(),createRequest.Password)).ReturnsAsync(IdentityResult.Success);
             _mockMapper.Setup(m=>m.Map<CustomerResponse>(It.IsAny<Customer>())).Returns(new CustomerResponse{Name = createRequest.Name});
             _mockConfiguration.SetupGet(conf => conf["Jwt:Key"]).Returns("dummy_jwt_key");
             _mockConfiguration.SetupGet(conf => conf["Jwt:Issuer"]).Returns("dummy_jwt_issuer");
             _mockConfiguration.SetupGet(conf => conf["Jwt:Audience"]).Returns("dummy_jwt_audience");
-
+            _mockUserManager.Setup(repo => repo.CreateAsync(It.IsAny<Customer>(),createRequest.Password)).ReturnsAsync(IdentityResult.Success);
+            
 
             var result = await customerApiController.RegisterCustomer(createRequest);
 
